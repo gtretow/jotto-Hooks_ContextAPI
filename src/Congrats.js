@@ -13,3 +13,8 @@ export default () => {
 
   </div>);
 };
+
+
+
+// child de APP.js
+//APP irá passar success para Congrats.js via props 

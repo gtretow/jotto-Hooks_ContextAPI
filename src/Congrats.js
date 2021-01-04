@@ -7,7 +7,7 @@ import React from "react";
 @returns {JSX.Element} rendered component
  */
 
-export default (props) => {
+const Congrats = (props) => {
   if (props.success) {
     return (
       <div data-test="component-congrats">
@@ -23,3 +23,5 @@ export default (props) => {
 
 // child de APP.js
 //APP irá passar success para Congrats.js via props
+
+export default Congrats;

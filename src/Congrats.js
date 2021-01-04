@@ -20,7 +20,13 @@ const Congrats = (props) => {
   } else {
     return <div data-test="component-congrats"></div>;
   }
+
 };
+
+Congrats.propTypes = {
+    success: PropTypes.bool.isRequired,
+}
+
 
 // child de APP.js
 //APP irá passar success para Congrats.js via props

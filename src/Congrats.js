@@ -1,5 +1,6 @@
 //functional component with no class - gonna receive value via props and show the congrats message if success is true
 import React from "react";
+import PropTypes from "prop-types";
 
 /* Functional react component for congratulatory message 
 @function 

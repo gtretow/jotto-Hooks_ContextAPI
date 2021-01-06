@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 const Congrats = (props) => {
   if (props.success) {
     return (
-      <div data-test="component-congrats">
+      <div data-test="component-congrats" className="alert alert-success">
         <span data-test="congrats-message">
           Congratulations! You guessed the word!
         </span>
@@ -20,13 +20,11 @@ const Congrats = (props) => {
   } else {
     return <div data-test="component-congrats"></div>;
   }
-
 };
 
 Congrats.propTypes = {
-    success: PropTypes.bool.isRequired,
-}
-
+  success: PropTypes.bool.isRequired,
+};
 
 // child de APP.js
 //APP irá passar success para Congrats.js via props

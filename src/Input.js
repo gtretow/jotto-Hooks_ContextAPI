@@ -4,6 +4,7 @@ import propTypes from "prop-types";
 //destruturação de secretWord
 function Input({ secretWord }) {
   const [currentGuess, setCurrentGuess] = React.useState("");
+  
   // é necessário retornar o state assim para usar mock functions
 
   return (
@@ -17,7 +18,19 @@ function Input({ secretWord }) {
           value={currentGuess}
           onChange={(event) => setCurrentGuess(event.target.value)}
         ></input>
-        <button data-test="submit-button" className="btn btn-primary mb-2">
+        <button
+          data-test="submit-button"
+          className="btn btn-primary mb-2"
+          onClick={(evt)=> {
+
+//previnir que a pagina atualize sozinha
+          evt.preventDefault();
+            //TODO: update guessedWords
+            //TODO: check against secretWord and update success if needed
+
+            setCurrentGuess("")
+          }}
+        >
           Submit
         </button>
       </form>

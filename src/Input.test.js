@@ -21,11 +21,15 @@ test("does not throw warning with expected props", () => {
 //import React from 'react'; é o correto para testes, não import {useContext}
 
 describe("state controller input field", () => {
-  test("state updates with value of input box upon change", () => {
-    const mockSetCurrentGuess = jest.fn();
+  let mockSetCurrentGuess = jest.fn();
+  let wrapper;
+  beforeEach(() => {
+    mockSetCurrentGuess.mockClear();
     React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
+    wrapper = setup();
+  });
 
-    const wrapper = setup();
+  test("state updates with value of input box upon change", () => {
     const inputBox = findByTestAttr(wrapper, "input-box");
 
     //simulando inputbox recebendo um value de "train"
@@ -33,5 +37,12 @@ describe("state controller input field", () => {
     inputBox.simulate("change", mockEvent);
 
     expect(mockSetCurrentGuess).toHaveBeenCalledWith("train");
+  });
+
+  test("setCurrentGuess gets called when submit button is clicked", () => {
+    const submitBtn = findByTestAttr(wrapper, "submit-button");
+
+    submitBtn.simulate("click", { preventDefault() {} });
+    expect(mockSetCurrentGuess).toHaveBeenCalledWith("");
   });
 });

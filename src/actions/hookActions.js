@@ -9,6 +9,7 @@ export const getSecretWord = async (setSecretWord) => {
 
 //default export for mocking convenience
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getSecretWord,
 };

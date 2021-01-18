@@ -1,11 +1,13 @@
 /* eslint-disable react/forbid-foreign-prop-types */
 import React from "react";
+// eslint-disable-next-line no-unused-vars
 import { shallow, mount } from "enzyme";
 
 import { findByTestAttr, checkProps } from "../test/testUtils";
 import Congrats from "./Congrats";
 import languageContext from "./contexts/languageContext";
 
+// eslint-disable-next-line no-unused-vars
 const defaultProps = { success: false };
 
 /* Factory function para criar um ShallowWrapper para o Congrats Component 

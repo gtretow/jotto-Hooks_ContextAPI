@@ -1,26 +1,43 @@
 /* eslint-disable react/forbid-foreign-prop-types */
 import React from "react";
-import  { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 
 import { findByTestAttr, checkProps } from "../test/testUtils";
 import Congrats from "./Congrats";
-
-
+import languageContext from "./contexts/languageContext";
 
 const defaultProps = { success: false };
 
 /* Factory function para criar um ShallowWrapper para o Congrats Component 
-@param {object} props - component props para esse setup
+@param {object} testValues - context values para esse setup
 @returns {ShallowWrapper}
 */
 
-const setup = (props = {}) => {
-  const setupProps = { ...defaultProps, ...props };
-  return shallow(<Congrats {...setupProps} />);
+const setup = ({ success, language }) => {
+  language = language || "en";
+  success = success || false;
+
+  return mount(
+    <languageContext.Provider value={language}>
+      <Congrats success={success} />
+    </languageContext.Provider>
+  );
 };
 
+describe("languagePicker", () => {
+  test("correctly renders congrats string in english", () => {
+    const wrapper = setup({ success: true });
+    expect(wrapper.text()).toBe("Congratulations! You guessed the word!");
+  });
+
+  test("correctly renders congrats string in emoji", () => {
+    const wrapper = setup({ success: true, language: "emoji" });
+    expect(wrapper.text()).toBe("🎯🎉");
+  });
+});
+
 test("renders without error", () => {
-  const wrapper = setup({ success: false });
+  const wrapper = setup({});
   const component = findByTestAttr(wrapper, "component-congrats");
   expect(component.length).toBe(1);
 });

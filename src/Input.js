@@ -1,14 +1,19 @@
 import React from "react";
 import propTypes from "prop-types";
 
+import successContext from "./contexts/successContext";
 import languageContext from "./contexts/languageContext";
 import stringsModule from "./helpers/strings";
 
 //destruturação de secretWord
 function Input({ secretWord }) {
   const language = React.useContext(languageContext);
+  const [success, setSuccess] = successContext.useContext();
   const [currentGuess, setCurrentGuess] = React.useState("");
 
+  if (success) {
+    return null;
+  }
   // é necessário retornar o state assim para usar mock functions
 
   return (

@@ -5,7 +5,9 @@ import "./App.css";
 import Input from "./Input";
 import languageContext from "./contexts/languageContext";
 import LanguagePicker from "./LanguagePicker";
-
+import successContext from "./contexts/successContext";
+import Congrats from "./Congrats";
+import GuessedWords from "./GuessedWords";
 //reducer to update state
 //state {object} - existing state
 // action {object} - contains 'type' and 'payload' prperties for the state updated
@@ -55,7 +57,11 @@ function App() {
       <h1>The Jotto Game!</h1>
       <languageContext.Provider value={state.language}>
         <LanguagePicker setLanguage={setLanguage} />
-        <Input secretWord={state.secretWord} />
+        <successContext.SuccessProvider>
+          <Congrats />
+          <Input secretWord={state.secretWord} />
+        </successContext.SuccessProvider>
+        {/* <GuessedWords /> */}
       </languageContext.Provider>
     </div>
   );

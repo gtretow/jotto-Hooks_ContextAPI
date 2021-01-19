@@ -1,7 +1,7 @@
 //functional component with no class - gonna receive value via props and show the congrats message if success is true
 import React from "react";
-import PropTypes from "prop-types";
 
+import successContext from "./contexts/successContext";
 import languageContext from "./contexts/languageContext";
 import stringsModule from "./helpers/strings";
 
@@ -11,9 +11,10 @@ import stringsModule from "./helpers/strings";
 @returns {JSX.Element} rendered component
  */
 
-const Congrats = (props) => {
+const Congrats = () => {
+  const [success] = successContext.useSuccess();
   const language = React.useContext(languageContext);
-  if (props.success) {
+  if (success) {
     return (
       <div data-test="component-congrats" className="alert alert-success">
         <span data-test="congrats-message">
@@ -24,10 +25,6 @@ const Congrats = (props) => {
   } else {
     return <div data-test="component-congrats"></div>;
   }
-};
-
-Congrats.propTypes = {
-  success: PropTypes.bool.isRequired,
 };
 
 // child de APP.js

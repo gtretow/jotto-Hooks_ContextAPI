@@ -37,8 +37,12 @@ function Input({ secretWord }) {
             //previnir que a pagina atualize sozinha
             evt.preventDefault();
             //TODO: update guessedWords
-            //TODO: check against secretWord and update success if needed
+            if (currentGuess === secretWord) {
+              setSuccess(true);
+            }
 
+            //TODO: check against secretWord and update success if needed
+            //clear input box
             setCurrentGuess("");
           }}
         >

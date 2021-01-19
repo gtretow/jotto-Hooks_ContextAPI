@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { EnzymeAdapter, ShallowWrapper } from "enzyme";
 import React from "react";
 import { shallow } from "enzyme";
@@ -51,22 +52,34 @@ describe("if there are words guessed", () => {
   });
 
   test("renders without error", () => {
-
     const component = findByTestAttr(wrapper, "component-guessed-words");
     expect(component.length).toBe(1);
-
   });
 
   test('renders "guessed words" section', () => {
-
-  const guessedWordsNode = findByTestAttr(wrapper, 'guessed-words');
-   expect(guessedWordsNode.length).toBe(1);
+    const guessedWordsNode = findByTestAttr(wrapper, "guessed-words");
+    expect(guessedWordsNode.length).toBe(1);
   });
 
   test("correct number of guessed words", () => {
-  
-    const guessedWordNodes = findByTestAttr(wrapper, 'guessed-word');
-    expect(guessedWordNodes.length).toBe(guessedWords.length)
+    const guessedWordNodes = findByTestAttr(wrapper, "guessed-word");
+    expect(guessedWordNodes.length).toBe(guessedWords.length);
+  });
+});
 
+describe("languagePicker", () => {
+  test("correctly renders guess instructions string in english by default", () => {
+    const wrapper = setup({ guessedWords: [] });
+    const guessInstructions = findByTestAttr(wrapper, "guess-instructions");
+    expect(guessInstructions.text()).toBe("Try to guess the secret word!");
+  });
+
+  test("correctly renders guess instructions string in emoji", () => {
+    const mockUseContext = jest.fn().mockReturnValue("emoji");
+    React.useContext = mockUseContext;
+
+    const wrapper = setup({ guessedWords: [] });
+    const guessInstructions = findByTestAttr(wrapper, "guess-instructions");
+    expect(guessInstructions.text()).toBe("🤔🤫🔤");
   });
 });

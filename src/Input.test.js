@@ -5,6 +5,7 @@ import { findByTestAttr, checkProps } from "../test/testUtils";
 import Input from "./Input";
 import languageContext from "./contexts/languageContext";
 import successContext from "./contexts/successContext";
+import guessedWordsContext from "./contexts/guessedWordsContext";
 
 /**
  * Create ReactWrapper for Input component for testing
@@ -19,7 +20,9 @@ const setup = ({ language, secretWord, success }) => {
   return mount(
     <languageContext.Provider value={language}>
       <successContext.SuccessProvider value={[success, jest.fn()]}>
-        <Input secretWord={secretWord} />
+        <guessedWordsContext.GuessedWordsProvider>
+          <Input secretWord={secretWord} />
+        </guessedWordsContext.GuessedWordsProvider>
       </successContext.SuccessProvider>
     </languageContext.Provider>
   );
@@ -71,11 +74,6 @@ describe("languagePicker", () => {
     const submitButton = findByTestAttr(wrapper, "submit-button");
     expect(submitButton.text()).toBe("🚀");
   });
-});
-
-test("input component does not show when success is true", () => {
-  const wrapper = setup({ secretWord: "party", success: true });
-  expect(wrapper.isEmptyRender()).toBe(true);
 });
 
 test("input component does not show when success is true", () => {

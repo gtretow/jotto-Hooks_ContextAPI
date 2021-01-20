@@ -66,7 +66,4 @@ Input.propTypes = {
   secretWord: PropTypes.string.isRequired,
 };
 
-//uso de mock
-//Não deixa funções reais rodarem, preve network calls pode espiar função para ver qnd é chamada (assim vc sabe que ela é chamada na hora certa e com argumentos certos) e vc também pode providenciar return values
-
 export default Input;
